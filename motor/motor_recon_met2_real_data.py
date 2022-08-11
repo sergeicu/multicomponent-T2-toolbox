@@ -37,7 +37,7 @@ import progressbar
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-matplotlib.rcParams['text.usetex']=True
+#matplotlib.rcParams['text.usetex']=True
 #matplotlib.rcParams['text.latex.unicode']=True
 
 # import pdb
@@ -435,6 +435,7 @@ def motor_recon_met2(TE_array, path_to_data, path_to_mask, path_to_save_data, TR
     dist_T2_mean2    = fmean2/np.sum(fmean2)
 
     # Save mean_T2_dist, which is the initial value for RUMBA
+    from IPython import embed; embed()
     fig  = plt.figure('Showing results', figsize=(8,8))
     ax0  = fig.add_subplot(1, 1, 1)
     im0  = plt.plot(T2s, mean_T2_dist,  color='b', label='Mean T2-dist from all voxels: NNLS')
@@ -445,7 +446,7 @@ def motor_recon_met2(TE_array, path_to_data, path_to_mask, path_to_save_data, TR
     plt.axvline(x=40.0, color='k', linestyle='--', ymin=0)
     plt.title('Mean spectrum', fontsize=18)
     plt.xlabel('T2', fontsize=18)
-    plt.ylabel('Intesity', fontsize=18)
+    plt.ylabel('Intensity', fontsize=18)
     ax0.set_xlim(T2s[0], T2s[-1])
     ax0.set_ylim(0, np.max(mean_T2_dist)*1.2)
     ax0.tick_params(axis='both', which='major', labelsize=16)
