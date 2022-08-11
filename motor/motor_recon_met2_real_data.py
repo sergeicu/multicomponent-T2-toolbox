@@ -36,7 +36,7 @@ import progressbar
 
 import matplotlib
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+#import matplotlib.ticker as ticker
 #matplotlib.rcParams['text.usetex']=True
 #matplotlib.rcParams['text.latex.unicode']=True
 
