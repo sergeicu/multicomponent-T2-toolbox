@@ -161,22 +161,54 @@ def fitting_slice_T2(mask_1d, data_1d, FA_index_1d, nx, Dic_3D, lambda_reg, T2di
     return tmp_f_sol_4D, tmp_signal, tmp_Reg
 #end main function
 
-#_______________________________________________________________________________
+#___________
+
+def fix_single_slice_image(data,mask,img,img_mask,path_to_save_data):
+
+    """ quick hack- if image is a single slice only - prevent np.squeeze from collapsing """
+
+    d=np.moveaxis(data,2,0)
+    data=np.moveaxis(np.vstack((d,d)), 0,2)
+
+    m=np.moveaxis(mask,2,0)
+    mask=np.moveaxis(np.vstack((m,m)), 0,2)
+
+    os.makedirs(path_to_save_data, exist_ok=True)
+
+    # save original image with multiple slice 
+    savename = path_to_save_data +'/Data_original.nii.gz'
+    datao=nib.Nifti1Image(data, header=img.header,affine=img.affine)
+    nib.save(datao,savename)
+
+    # save original image with multiple slice 
+    savename = path_to_save_data +'/seg.nii.gz'
+    datao=nib.Nifti1Image(mask, header=img_mask.header,affine=img_mask.affine)
+    nib.save(datao,savename)
+
+    return data,mask
+
 def motor_recon_met2(TE_array, path_to_data, path_to_mask, path_to_save_data, TR, reg_method, reg_matrix, denoise, FA_method, FA_smooth, myelin_T2, num_cores):
     # Load Data and Mask
     img      = nib.load(path_to_data)
     data     = img.get_data()
     data     = data.astype(np.float64, copy=False)
-
+        
     img_mask = nib.load(path_to_mask)
     mask     = img_mask.get_data()
     mask     = mask.astype(np.int64, copy=False)
+
+    
+    if data.shape[-2]==1:
+        # quick hack- if image is a single slice only - prevent np.squeeze from collapsing 
+        data, mask = fix_single_slice_image(data,mask,img,img_mask,path_to_save_data)
+
+
 
     print('--------- Data shape -----------------')
     nx, ny, nz, nt = data.shape
     print(data.shape)
     print('--------------------------------------')
-
+    #from IPython import embed; embed()
     for c in range(nt):
         data[:,:,:,c] = np.squeeze(data[:,:,:,c]) * mask
     #end

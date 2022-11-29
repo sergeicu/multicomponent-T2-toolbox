@@ -96,7 +96,7 @@ def fitting_slice_FA_brute_force(mask_1d, data_1d, nx, Dic_3D, alpha_values):
     tmp_Fsol       = 0.0
     totVoxels_sclices = np.count_nonzero(mask_1d)
     if totVoxels_sclices > 0:
-        for voxelx in xrange(nx):
+        for voxelx in range(nx):
             if (mask_1d[voxelx] > 0.0) and (np.sum(data_1d[voxelx, :])) > 0.0:
                 M      = data_1d[voxelx, :]
                 # compute the flip angle (alpha_mean) and the proton density (km_i)
