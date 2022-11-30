@@ -435,7 +435,7 @@ def motor_recon_met2(TE_array, path_to_data, path_to_mask, path_to_save_data, TR
     dist_T2_mean2    = fmean2/np.sum(fmean2)
 
     # Save mean_T2_dist, which is the initial value for RUMBA
-    from IPython import embed; embed()
+    #from IPython import embed; embed()
     fig  = plt.figure('Showing results', figsize=(8,8))
     ax0  = fig.add_subplot(1, 1, 1)
     im0  = plt.plot(T2s, mean_T2_dist,  color='b', label='Mean T2-dist from all voxels: NNLS')
