@@ -4,11 +4,8 @@
 ##########
 
 # git clone 
-git clone git@github.com:sergeicu/multicomponent-T2-toolbox.git
+git clone https://github.com/sergeicu/multicomponent-T2-toolbox.git
 cd multicomponent-T2-toolbox
-
-# check python - it should be python 3+
-python --version 
 
 # create virtual environment 
 mkdir -p venv
@@ -25,13 +22,24 @@ pip install -r requirements.txt
 # Run analysis on single nifti file (using best method, as noted from empirical studies)
 ##########
 
-# setup 
+# locate codedir
 codedir=<path_to_repository>
+
+# activate python 
+source $codedir/venv/bin/activate 
+
+# provide name of nifti 
 f=<4D_nifti>
 
+# [optional] create mask file 
+python3 $codedir/create_seg.py $f
+
+# provide mask file 
+mask=<mask_file>
+
 # run 
-python $codedir/run_real_data_script.py --input $f --minTE 8.2 --nTE 18 --TR 1000 --path_to_folder $PWD/ \
-    --mask mask.nii.gz --savefig no --savefig_slice 0 --FA_method spline --FA_smooth no --denoise TV \
+python3 $codedir/run_real_data_script.py --input $f --minTE 8.2 --nTE 18 --TR 1000 --path_to_folder $PWD/ \
+    --mask $mask --savefig no --savefig_slice 0 --FA_method spline --FA_smooth no --denoise TV \
     --reg_method T2SPARC \
     --reg_matrix I \
     --myelin_T2_cutoff 30
