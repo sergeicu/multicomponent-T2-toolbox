@@ -26,8 +26,12 @@ pip install -r requirements.txt
 # Run analysis on single nifti file (using best method, as noted from empirical studies)
 ##########
 
-# locate codedir
-codedir=<path_to_repository>
+# WARNING: check that you are running python==3.8.6 (or just ssh to ankara). 
+# This code did not work on python==3.6 (installed on istanbul by default) 
+python3 --version 
+
+# locate codedir (installed for onur) 
+codedir=/fileserver/fastscratch/serge/for_onur/multicomponent-T2-toolbox
 
 # activate python 
 source $codedir/venv/bin/activate 
