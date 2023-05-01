@@ -10,6 +10,7 @@ cd multicomponent-T2-toolbox
 # create virtual environment 
 mkdir -p venv
 python3 -m venv $PWD/venv
+git checkout crl
 
 # activate environment 
 source venv/bin/activate
