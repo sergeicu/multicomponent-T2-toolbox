@@ -11,10 +11,6 @@ cd multicomponent-T2-toolbox
 mkdir -p venv
 python3 -m venv $PWD/venv
 
-# checkout correct branch 
-git checkout crl
-git pull origin crl
-
 # activate environment 
 source venv/bin/activate
 
