@@ -3,6 +3,9 @@
 # Setup environment 
 ##########
 
+# check python (currently works on python 3.8, and does not work on python 3.6)
+python3 --version
+
 # git clone 
 git clone https://github.com/sergeicu/multicomponent-T2-toolbox.git
 cd multicomponent-T2-toolbox
